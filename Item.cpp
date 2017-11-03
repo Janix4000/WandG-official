@@ -2,8 +2,12 @@
 
 
 
-Item::Item()
+Item::Item(const std::string& name, Rarity rarity, int sellValue , int buyValue )
 {
+	this->name = name;
+	this->sellValue = sellValue; 
+	this->buyValue = buyValue;
+	this->rarity = rarity;
 }
 
 

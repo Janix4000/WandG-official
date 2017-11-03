@@ -1,9 +1,6 @@
 #pragma once
-#include <string>
-#include <iostream>
 #include <iomanip>
-#include <vector>
-#include "Item.h"
+#include "Inventory.h"
 
 class Character
 {

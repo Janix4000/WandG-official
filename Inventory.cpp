@@ -1,0 +1,60 @@
+#include "Inventory.h"
+
+
+
+Inventory::Inventory()
+{
+}
+
+
+Inventory::~Inventory()
+{
+	unsigned int cap = itemVec.size();
+	for (unsigned int i = 0; i < cap; i++)
+	{
+		delete itemVec[i];
+	}
+}
+
+void Inventory::addItem(const Item & item)
+{
+	itemVec.emplace_back(new Item(item));
+}
+
+Inventory & Inventory::operator=(const Inventory & rhs)
+{
+	unsigned int cap = itemVec.size();
+	for (int i = cap-1; i >= 0; i--)
+	{
+		delete itemVec[i];
+		itemVec.pop_back();
+	}
+
+	unsigned int srcCap = rhs.itemVec.size();
+	for (unsigned int i = 0; i < srcCap; i++)
+	{
+		itemVec.emplace_back(new Item(*rhs.itemVec[i]));
+	}
+	return *this;
+}
+
+Inventory::Inventory(const Inventory & rhs)
+{
+	unsigned int srcCap = rhs.itemVec.size();
+	for (unsigned int i = 0; i < srcCap; i++)
+	{
+		itemVec.emplace_back(new Item(*rhs.itemVec[i]));
+	}
+}
+
+Item & Inventory::operator[](int index)
+{
+	assert(index >= 0 && index < itemVec.size());
+	return *itemVec[index];
+}
+
+const Item & Inventory::operator[](int index) const
+{
+	assert(index >= 0 && index < itemVec.size());
+	return *itemVec[index];
+}
