@@ -18,7 +18,7 @@ Inventory::~Inventory()
 
 void Inventory::addItem(const Item & item)
 {
-	itemVec.emplace_back(new Item(item));
+	itemVec.emplace_back(item.clone());
 }
 
 Inventory & Inventory::operator=(const Inventory & rhs)
@@ -33,7 +33,7 @@ Inventory & Inventory::operator=(const Inventory & rhs)
 	unsigned int srcCap = rhs.itemVec.size();
 	for (unsigned int i = 0; i < srcCap; i++)
 	{
-		itemVec.emplace_back(new Item(*rhs.itemVec[i]));
+		itemVec.emplace_back(rhs.itemVec[i]->clone());
 	}
 	return *this;
 }
@@ -43,7 +43,7 @@ Inventory::Inventory(const Inventory & rhs)
 	unsigned int srcCap = rhs.itemVec.size();
 	for (unsigned int i = 0; i < srcCap; i++)
 	{
-		itemVec.emplace_back(new Item(*rhs.itemVec[i]));
+		itemVec.emplace_back(rhs.itemVec[i]->clone());
 	}
 }
 

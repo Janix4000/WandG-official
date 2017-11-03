@@ -47,6 +47,8 @@ public:
 
 	//Modifiers
 
+	void addExp(int add);
+
 private:
 	std::string name;
 	int hp;
@@ -67,6 +69,10 @@ private:
 	int exp;
 	int expToNext;
 	int level;
+
+	Inventory inventory;
+	Weapon weapon;
+	Armor armor;
 
 };
 

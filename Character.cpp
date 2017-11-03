@@ -79,3 +79,9 @@ void Character::drawSheet() const
 		
 
 }
+
+void Character::addExp(int add)
+{
+	this->exp += add;
+	levelUp();
+}

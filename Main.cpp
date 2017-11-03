@@ -3,8 +3,7 @@
 int main()
 {
 	Game game;
-	game.createCharacter();
-	std::cout << std::endl;
+	
 
 	while (game.getPlaying())
 	{

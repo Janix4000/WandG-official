@@ -15,9 +15,12 @@ public:
 	void mainMenu();
 	inline bool getPlaying() const { return playing; }
 	void createCharacter();
+	void addExpToCharacter();
+	void chooseCharacter();
 
 private:
 	int choice;
 	bool playing;
-	Character character;
+	int curCharacter = 0;
+	std::vector<Character> characters;
 };

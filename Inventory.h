@@ -1,5 +1,6 @@
 #pragma once
-#include "Item.h"
+#include "Weapon.h"
+#include "Armor.h"
 #include <vector>
 #include <cassert>
 
@@ -11,7 +12,7 @@ public:
 
 	//Accesors
 
-	inline int getSize() const { return itemVec.size(); }
+	inline int size() const { return itemVec.size(); }
 
 	//Functions
 

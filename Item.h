@@ -29,6 +29,10 @@ public:
 	inline const int& getBuyValue() const { return buyValue; }
 	inline const Rarity& getRarity() const { return rarity; }
 
+	//Pure Virtual
+
+	virtual Item* clone() const = 0;
+
 private:
 	int sellValue;
 	int buyValue;
