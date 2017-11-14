@@ -14,13 +14,15 @@ public:
 	//Functions
 	void mainMenu();
 	inline bool getPlaying() const { return playing; }
-	void createCharacter();
+	void createTeam();
 	void addExpToCharacter();
-	void chooseCharacter();
+	void chooseTeam();
+	void createCharacter();
 
 private:
 	int choice;
 	bool playing;
-	int curCharacter = 0;
-	std::vector<Character> characters;
+	int curTeam = 0;
+	std::vector<std::vector<Character>> teams;
+	std::vector<std::string> teamNames;
 };

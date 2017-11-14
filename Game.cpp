@@ -6,15 +6,6 @@ Game::Game()
 	playing = true;
 	createCharacter();
 
-	Inventory inv;
-	inv.addItem(Weapon("Stasiek"));
-	inv.addItem(Weapon("Mariola"));
-	inv.addItem(Weapon("Andrzej"));
-	inv.addItem(Armor("Husiek"));
-	for (int i = 0; i < inv.size(); i++)
-	{
-		std::cout << inv[i].getName() << std::endl;
-	}
 
 }
 
@@ -27,10 +18,11 @@ void Game::mainMenu()
 	std::cout << " = MENU = " << std::endl
 		<< std::endl
 		<< "1. Wyjdz" << std::endl
-		<< "2. Stworz Bohatera" << std::endl
-		<< "3. Wybierz Bohatera" << std::endl
-		<< "4. Level Up" << std::endl
-		<< "5. Staty" << std::endl
+		<< "2. Stworz Team" << std::endl
+		<< "3. Wybierz Team" << std::endl
+		<< "4. Stworz Postac" << std::endl
+		<< "5. Level Up" << std::endl
+		<< "6. Staty" << std::endl
 		<< std::endl
 		<< "Wybierz: ";
 	std::cin >> choice;
@@ -41,48 +33,59 @@ void Game::mainMenu()
 		playing = false;
 		break;
 	case 2:
-		createCharacter();
+		createTeam();
 		break;
 	case 3:
-		chooseCharacter();
+		chooseTeam();
 		break;
 	case 4:
-		addExpToCharacter();
+		createCharacter();
 		break;
 	case 5:
-		characters[curCharacter].drawSheet();
+		addExpToCharacter();
+		break;
+	case 6:
+		for (const Character& hero : teams[curTeam])
+		{
+			hero.drawSheet();
+			std::cout << std::endl;
+		}
 		break;
 	default:
 		break;
 	}
 }
 
-void Game::createCharacter()
+void Game::createTeam()
 {
-	std::cout << "Podaj imie bohatera: ";
+	std::cout << "Podaj nazwe Teamu: ";
 	std::string name = "NONE";
 	std::cin >> name;
-	characters.emplace_back(Character());
-	curCharacter = characters.size() - 1;
-	characters[curCharacter].init(name);
+	teamNames.emplace_back(name);
+	teams.emplace_back();
+	curTeam = teams.size() - 1;
+	createCharacter();
 }
 
 void Game::addExpToCharacter()
 {
 	int exp;
 	std::cout << std::endl;
-	std::cout << "Dodaj do aktualnej postaci exp: ";
+	std::cout << "Dodaj wszystkim postacia exp: ";
 	std::cin >> exp;
-	characters[curCharacter].addExp(exp);
+	for (Character& hero : teams[curTeam])
+	{
+		hero.addExp(exp);
+	}
 }
 
-void Game::chooseCharacter()
+void Game::chooseTeam()
 {
 	std::cout << std::endl;
-	int cap = characters.size();
+	int cap = teams.size();
 	for (int i = 0; i < cap; i++)
 	{
-		std::cout << i + 1 << ". " << characters[i].getName() << std::endl;
+		std::cout << i + 1 << ". " << teamNames[i] << std::endl;
 	}
 	std::cout << std::endl
 		<< "Wybierz: ";
@@ -91,6 +94,15 @@ void Game::chooseCharacter()
 	choice--;
 	if (choice < 0) choice = 0;
 	else if (choice >= cap) choice = cap - 1;
-	curCharacter = choice;
+	curTeam = choice;
+}
+
+void Game::createCharacter()
+{
+	std::cout << "Podaj imie bohatyra: ";
+	std::string name = "NONE";
+	std::cin >> name;
+	teams[curTeam].emplace_back(Character());
+	teams[curTeam][teams.size() - 1].init(name);
 }
 

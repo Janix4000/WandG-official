@@ -80,6 +80,16 @@ void Character::drawSheet() const
 
 }
 
+void Character::takeDamage(int dam)
+{
+	this->hp -= dam;
+}
+
+int Character::getDamage() const
+{
+	return this->strength;
+}
+
 void Character::addExp(int add)
 {
 	this->exp += add;
