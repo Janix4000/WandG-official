@@ -122,9 +122,11 @@
   <ItemGroup>
     <ClInclude Include="Armor.h" />
     <ClInclude Include="Character.h" />
+    <ClInclude Include="Dice.h" />
     <ClInclude Include="Game.h" />
     <ClInclude Include="Inventory.h" />
     <ClInclude Include="Item.h" />
+    <ClInclude Include="SpellCodex.h" />
     <ClInclude Include="Weapon.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />

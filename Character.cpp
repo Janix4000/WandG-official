@@ -2,9 +2,9 @@
 
 
 
-Character::Character()
+Character::Character(std::string& name)
 {
-	this->name = "";
+	this->name = name;
 	this->maxHP = 10;
 	this->hp = maxHP;
 	this->maxPA = 10;
@@ -78,6 +78,11 @@ void Character::drawSheet() const
 		<< std::endl << std::endl;
 		
 
+}
+
+void Character::takeDamage(int dam)
+{
+	hp -= dam;
 }
 
 void Character::addExp(int add)

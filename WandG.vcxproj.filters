@@ -56,5 +56,11 @@
     <ClInclude Include="Armor.h">
       <Filter>Header Files</Filter>
     </ClInclude>
+    <ClInclude Include="SpellCodex.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Dice.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
   </ItemGroup>
 </Project>

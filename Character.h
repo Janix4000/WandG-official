@@ -1,15 +1,16 @@
 #pragma once
 #include <iomanip>
 #include "Inventory.h"
+#include "SpellCodex.h"
 
 class Character
 {
 public:
-	Character();
+	Character(std::string& name);
 	~Character();
 
 	//Enums
-
+	/*
 	enum class Size
 	{
 		tiny,
@@ -18,12 +19,13 @@ public:
 		big,
 		large
 	};
-
+	*/
 	//Functions
 
 	void init( const std::string& name);
 	void levelUp();
 	void drawSheet() const;
+	void takeDamage(int dam);
 
 	//Accesors
 
@@ -32,7 +34,10 @@ public:
 	inline const int& getMaxtHP() const { return this->maxHP; }
 	inline const int& getPA() const { return this->pa; }
 	inline const int& getMaxPA() const { return this->maxPA; }
-	inline const Size& getSizet() const { return this->size; }
+	//inline const Size& getSizet() const { return this->size; }
+	inline const int& getMana() const { return this->mana; }
+	inline const int& getMaxManaPA() const { return this->maxMana; }
+
 
 	inline const int& getStrenght() const { return this->strength; }
 	inline const int& getIntelligence() const { return this->intelligence; }
@@ -48,6 +53,15 @@ public:
 	//Modifiers
 
 	void addExp(int add);
+	inline void addMana(int add) 
+	{
+		mana += add;  if (mana < 0) mana = 0; else if (mana > maxMana)mana = maxMana;
+	}
+	inline void addPA(int add)
+	{
+		pa += add;  if (pa < 0) pa = 0; else if (pa > maxPA)pa = maxPA;
+	}
+
 
 private:
 	std::string name;
@@ -55,7 +69,9 @@ private:
 	int maxHP;
 	int pa;
 	int maxPA;
-	Size size;
+	//Size size;
+	int mana;
+	int maxMana;
 
 
 	int strength;
