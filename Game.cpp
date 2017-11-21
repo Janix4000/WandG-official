@@ -33,6 +33,7 @@ void Game::mainMenu()
 		<< "4. Level Up" << std::endl
 		<< "5. Staty" << std::endl
 		<< "6. Stworz bohatera" << std::endl
+		<< "7. Nap" << std::endl
 		<< std::endl
 		<< "Wybierz: ";
 	std::cin >> choice;
@@ -62,6 +63,10 @@ void Game::mainMenu()
 	}
 	case 6:
 		createCharacter();
+		break;
+	case 7:
+		napierdalando(teams[curTeam][0], teams[curTeam][1]);
+			break;
 	default:
 		break;
 	}
@@ -109,6 +114,11 @@ void Game::chooseTeam()
 	system("cls");
 }
 
+void Game::napierdalando(Character & c1, Character & c2)
+{
+	c1.useSpell(sc::Fireball(), c2);
+}
+
 int Game::drawCharMenu() const
 {
 	system("cls");
@@ -146,7 +156,7 @@ int Game::drawTeamMenu() const
 		std::cin >> choose;
 		if (--choose < 0 || choose >= size || std::cin.fail())
 		{
-			std::cout << "Pojebalo? Wpisz normalna liczbe\n";
+			std::cout << "Wpisz normalna liczbe\n";
 			std::cin.ignore(std::numeric_limits<std::streamsize>::max(), '\n');
 		}
 		else break;

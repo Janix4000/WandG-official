@@ -18,6 +18,7 @@ public:
 	void createTeam();
 	void addExpToCharacter();
 	void chooseTeam();
+	void napierdalando(Character& c1, Character& c2);
 
 private:
 	int choice;

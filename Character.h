@@ -26,6 +26,11 @@ public:
 	void levelUp();
 	void drawSheet() const;
 	void takeDamage(int dam);
+	template<typename S>
+	inline void useSpell(S spell, Character& target)
+	{
+		spell(*this, target);
+	}
 
 	//Accesors
 
@@ -91,4 +96,5 @@ private:
 	Armor armor;
 
 };
+
 

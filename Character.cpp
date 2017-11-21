@@ -5,13 +5,16 @@
 Character::Character(std::string& name)
 {
 	this->name = name;
-	this->maxHP = 10;
+	this->maxHP = 100;
 	this->hp = maxHP;
 	this->maxPA = 10;
 	this->pa = maxPA;;
 
+	maxMana = 100;
+	mana = 100;
+
 	this->strength = 0;
-	this->intelligence = 0;
+	this->intelligence = 10;
 	this->vitality = 0;
 	this->dexterity = 0;
 	this->charisma = 0;
@@ -38,7 +41,7 @@ void Character::init(const std::string & name)
 	this->pa = maxPA;;
 
 	this->strength = 0;
-	this->intelligence = 0;
+	this->intelligence = 10;
 	this->vitality = 0;
 	this->dexterity = 0;
 	this->charisma = 0;

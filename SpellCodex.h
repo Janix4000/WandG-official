@@ -15,29 +15,29 @@ namespace sc
 		int minIntell = 5;
 	public:
 		template<typename C, typename T>
-		void operator()(&C, &T) const
+		void operator()(C& caster, T& target) const
 		{
 			system("cls");
-			if (C.getIntelligence() < minIntell)
+			if (caster.getIntelligence() < minIntell)
 			{
-				std::cout << C.getName() << " ma za malo inteligencji by rzucic to zaklecie! \n";
+				std::cout << caster.getName() << " ma za malo inteligencji by rzucic to zaklecie! \n";
 				return;
 			}
-			else if (C.getMana < manaCost)
+			else if (caster.getMana() < manaCost)
 			{
-				std::cout << C.getName() << " ma za malo many by  rzucic to zaklecie! \n";
+				std::cout << caster.getName() << " ma za malo many by  rzucic to zaklecie! \n";
 				return;
 			}
-			else if (C.getPA() < paCost)
+			else if (caster.getPA() < paCost)
 			{
-				std::cout << C.getName() << " nie ma wystarczajaco punktow akcji by rzucic to zaklecie! \n";
+				std::cout << caster.getName() << " nie ma wystarczajaco punktow akcji by rzucic to zaklecie! \n";
 				return;
 			}
-			std::cout << C.getName() << " uzyl " << name <<" na " << T.getName() << "!\n";
-			int finalDam = C.getIntelligence + damage + D6();
-			T.takeDamage(finalDam);
-			C.addMana(-manaCost);
-			C.addPA(-paCost);
+			std::cout << caster.getName() << " uzyl " << name <<" na " << target.getName() << "!\n";
+			int finalDam = caster.getIntelligence() + damage + D6();
+			target.takeDamage(finalDam);
+			caster.addMana(-manaCost);
+			caster.addPA(-paCost);
 		}
 
 	};
