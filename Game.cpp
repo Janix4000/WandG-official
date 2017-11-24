@@ -3,7 +3,6 @@
 
 Game::Game()
 {
-	choice = 0;
 	playing = true;
 	createTeam();
 	/*
@@ -36,8 +35,12 @@ void Game::mainMenu()
 		<< "7. Nap" << std::endl
 		<< std::endl
 		<< "Wybierz: ";
-	std::cin >> choice;
-	std::cin.ignore(std::numeric_limits<std::streamsize>::max(), '\n');
+	int choice;
+	do
+	{
+		choice = _getch();
+		choice -= '0';
+	} while (choice < 1 || choice > 7);
 	switch (choice)
 	{
 	case 1:
@@ -50,19 +53,15 @@ void Game::mainMenu()
 		chooseTeam();
 		break;
 	case 4:
-		addExpToCharacter();
+		teams[curTeam].addExpToCharacter();
 		break;
 	case 5:
 	{
-		for (int i = 0; i < teams[curTeam].size(); i++)
-		{
-			teams[curTeam][i].drawSheet();
-			std::cout << "\n";
-		}
+		teams[curTeam].charactersMenu();
 		break;
 	}
 	case 6:
-		createCharacter();
+		teams[curTeam].createCharacter();
 		break;
 	case 7:
 		napierdalando(teams[curTeam][0], teams[curTeam][1]);
@@ -72,15 +71,6 @@ void Game::mainMenu()
 	}
 }
 
-void Game::createCharacter()
-{
-	std::cout << "Podaj imie bohatera: ";
-	std::string name = "NONE";
-	std::cin >> name;
-	//creating new hero in team
-	teams[curTeam].emplace_back(Character(name));
-}
-
 void Game::createTeam()
 {
 	system("cls");
@@ -88,79 +78,82 @@ void Game::createTeam()
 	std::string name = "NONE";
 	std::cin >> name;
 	//creating new team
-	teams.emplace_back();
+	teams.emplace_back(Team(name));
 	//init hero name
-	teamsNames.emplace_back(name);
 	curTeam = teams.size() - 1;
-	createCharacter();
-}
-
-
-void Game::addExpToCharacter()
-{
 	system("cls");
-	int exp;
-	int choice = drawCharMenu();
-	std::cout << std::endl;
-	std::cout << "Dodaj do wybranej postaci exp: ";
-	std::cin >> exp;
-	teams[curTeam][choice].addExp(exp);
 }
+
+
+
 
 void Game::chooseTeam()
 {
-	system("cls");
 	this->curTeam = drawTeamMenu();
 	system("cls");
 }
 
 void Game::napierdalando(Character & c1, Character & c2)
 {
-	c1.useSpell(sc::Fireball(), c2);
+
+	c1.useSpell(SC.getFireball(), c2);
+	c1.useSpell(SC.getFireball(), c2);
+	c1.useSpell(SC.getLHeal(), c2);
+	SC.useSpell(c1, c2, SPELLS::LesserHeal);
 }
 
-int Game::drawCharMenu() const
+void Game::battle(Team& t1, Team& t2)
 {
+	std::cout << "Ten, napieprzaja sie dwie druzyny!";
+	std::cin.get();
 	system("cls");
-	const int size = teams[curTeam].size();
-	int choose;
-	std::cout<<"Wybierz postac: \n";
-	while (true)
+	int teamIndex =0;
+	int cap1 = (int)t1.size();
+	int cap2 = (int)t2.size();
+	int wholeCap = cap2 + cap1;
+	std::vector<bool> atackers(wholeCap, 0);
+	int index;
+	while (wholeCap-- > 0 && t1.areAlive() && t2.areAlive())
 	{
-		for (int i = 0; i < size; i++)
+		do
 		{
-			std::cout << i + 1 << ". " << teams[curTeam][i].getName() << "\n";
-		}
-		std::cin >> choose;
-		if (--choose < 0 || choose >= size || std::cin.fail())
+			index = rand() % wholeCap;
+		} while (atackers[index] == true);
+		if (index < cap1)
 		{
-			std::cout << "Pojebalo? Wpisz normalna liczbe\n";
-			std::cin.ignore(std::numeric_limits<std::streamsize>::max(), '\n');
+
 		}
-		else break;
+		else
+		{
+			index -= cap1;
+		}
 	}
-	return choose;
+	
+	for()
+
 }
+
+
+
+
 
 int Game::drawTeamMenu() const
 {
-	const int size = teams.size();
-	int choose;
-	std::cout << "Wybierz team: ";
-	while (true)
+	const size_t size = teams.size();
+	char choice;
+	for (int i = 0; i < size; i++)
 	{
-		for (int i = 0; i < size; i++)
-		{
-			std::cout << i + 1 << ". " << teamsNames[i] << "\n";
-		}
-		std::cin >> choose;
-		if (--choose < 0 || choose >= size || std::cin.fail())
-		{
-			std::cout << "Wpisz normalna liczbe\n";
-			std::cin.ignore(std::numeric_limits<std::streamsize>::max(), '\n');
-		}
-		else break;
+		std::cout << i + 1 << ". " << teams[curTeam].getName() << "\n";
 	}
-	return choose;
+	std::cout << "Wybierz team: ";
+	do
+	{
+		choice = _getch();
+		choice -= '0';
+	} while (--choice < 0 || choice >= size);
+	return choice;
 }
+
+
+
 

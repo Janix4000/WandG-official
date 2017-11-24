@@ -22,7 +22,6 @@ public:
 	*/
 	//Functions
 
-	void init( const std::string& name);
 	void levelUp();
 	void drawSheet() const;
 	void takeDamage(int dam);
@@ -42,7 +41,7 @@ public:
 	//inline const Size& getSizet() const { return this->size; }
 	inline const int& getMana() const { return this->mana; }
 	inline const int& getMaxManaPA() const { return this->maxMana; }
-
+	inline bool isAlive() const { return hp >= 0; }
 
 	inline const int& getStrenght() const { return this->strength; }
 	inline const int& getIntelligence() const { return this->intelligence; }
@@ -66,6 +65,7 @@ public:
 	{
 		pa += add;  if (pa < 0) pa = 0; else if (pa > maxPA)pa = maxPA;
 	}
+
 
 
 private:

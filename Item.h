@@ -1,6 +1,8 @@
 #pragma once
 #include <string>
 #include <iostream>
+#include <stdio.h>
+#include <conio.h>
 
 class Item
 {
