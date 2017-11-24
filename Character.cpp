@@ -48,6 +48,7 @@ void Character::drawSheet() const
 		<< "Imie: " << name << std::endl
 		<< "Hp: " << hp << "/" << maxHP << std::endl
 		<< "Punkty Akcji: " << pa << "/" << maxPA << std::endl
+		<< "Mana: " << mana << "/" << maxMana << std::endl
 		<< std::endl
 		<< "Sila: " << strength << std::endl
 		<< "Intelekt: " << intelligence << std::endl

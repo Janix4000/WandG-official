@@ -129,8 +129,7 @@ void Game::battle(Team& t1, Team& t2)
 		}
 	}
 	
-	for()
-
+	//
 }
 
 
