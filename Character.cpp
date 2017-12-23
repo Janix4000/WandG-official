@@ -67,7 +67,11 @@ void Character::drawSheet() const
 void Character::takeDamage(int dam)
 {
 	hp -= dam;
-	if (hp > maxHP) hp = maxHP;
+	if (hp > maxHP)
+	{
+		hp = maxHP;
+		std::cout << name << " przyjal na twarz " << dam << " punktow obrazen!\n";
+	}
 }
 
 void Character::addExp(int add)

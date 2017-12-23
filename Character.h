@@ -42,6 +42,7 @@ public:
 	inline const int& getMana() const { return this->mana; }
 	inline const int& getMaxManaPA() const { return this->maxMana; }
 	inline bool isAlive() const { return hp >= 0; }
+	inline bool didAtack() const { return didHeAtack; }
 
 	inline const int& getStrenght() const { return this->strength; }
 	inline const int& getIntelligence() const { return this->intelligence; }
@@ -65,7 +66,10 @@ public:
 	{
 		pa += add;  if (pa < 0) pa = 0; else if (pa > maxPA)pa = maxPA;
 	}
-
+	inline void reverseAtack()
+	{
+		didHeAtack = !didHeAtack;
+	}
 
 
 private:
@@ -94,6 +98,8 @@ private:
 	Inventory inventory;
 	Weapon weapon;
 	Armor armor;
+
+	bool didHeAtack = false;
 
 };
 
