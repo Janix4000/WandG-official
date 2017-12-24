@@ -26,7 +26,7 @@ private:
 	size_t curTeam = 0;
 	std::vector< Team > teams;
 
-	SpellCodex SC;
+	//SpellCodex SC;
 
 	//Functions
 	
