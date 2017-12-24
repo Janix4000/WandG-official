@@ -9,7 +9,7 @@ Inventory::Inventory()
 
 Inventory::~Inventory()
 {
-	unsigned int cap = itemVec.size();
+	unsigned int cap = (int)itemVec.size();
 	for (unsigned int i = 0; i < cap; i++)
 	{
 		delete itemVec[i];
@@ -23,14 +23,14 @@ void Inventory::addItem(const Item & item)
 
 Inventory & Inventory::operator=(const Inventory & rhs)
 {
-	unsigned int cap = itemVec.size();
+	unsigned int cap = (int)itemVec.size();
 	for (int i = cap-1; i >= 0; i--)
 	{
 		delete itemVec[i];
 		itemVec.pop_back();
 	}
 
-	unsigned int srcCap = rhs.itemVec.size();
+	unsigned int srcCap = (int)rhs.itemVec.size();
 	for (unsigned int i = 0; i < srcCap; i++)
 	{
 		itemVec.emplace_back(rhs.itemVec[i]->clone());
@@ -40,7 +40,7 @@ Inventory & Inventory::operator=(const Inventory & rhs)
 
 Inventory::Inventory(const Inventory & rhs)
 {
-	unsigned int srcCap = rhs.itemVec.size();
+	unsigned int srcCap = (int)rhs.itemVec.size();
 	for (unsigned int i = 0; i < srcCap; i++)
 	{
 		itemVec.emplace_back(rhs.itemVec[i]->clone());

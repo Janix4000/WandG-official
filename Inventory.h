@@ -12,14 +12,14 @@ public:
 
 	//Accesors
 
-	inline int size() const { return itemVec.size(); }
+	inline int size() const { return int(itemVec.size()); }
 
 	//Functions
 
 	void addItem(const Item& item);
 	inline void printDebbug() const
 	{
-		unsigned int cap = itemVec.size();
+		size_t cap = itemVec.size();
 		for (unsigned int i = 0; i < cap; i++)
 		{
 			std::cout << itemVec[i]->getName() << std::endl;

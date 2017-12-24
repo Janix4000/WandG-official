@@ -1,7 +1,7 @@
 #pragma once
 #include <algorithm>
 #include <math.h>
-#include "Character.h"
+#include "Team.h"
 
 class Game
 {
@@ -14,15 +14,21 @@ public:
 	//Functions
 	void mainMenu();
 	inline bool getPlaying() const { return playing; }
+	
 	void createTeam();
-	void addExpToCharacter();
+	
 	void chooseTeam();
-	void createCharacter();
+	void napierdalando(Character& c1, Character& c2);
+	void battle(Team& t1, Team& t2);
 
 private:
-	int choice;
 	bool playing;
-	int curTeam = 0;
-	std::vector<std::vector<Character>> teams;
-	std::vector<std::string> teamNames;
+	size_t curTeam = 0;
+	std::vector< Team > teams;
+
+	SpellCodex SC;
+
+	//Functions
+	
+	int drawTeamMenu()const;
 };

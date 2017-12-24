@@ -1,12 +1,21 @@
 #include "Game.h"
+#include<limits>
 
 Game::Game()
 {
-	choice = 0;
 	playing = true;
 	createTeam();
-
-
+	/*
+	Inventory inv;
+	inv.addItem(Weapon("Stasiek"));
+	inv.addItem(Weapon("Mariola"));
+	inv.addItem(Weapon("Andrzej"));
+	inv.addItem(Armor("Husiek"));
+	for (int i = 0; i < inv.size(); i++)
+	{
+		std::cout << inv[i].getName() << std::endl;
+	}
+	*/
 }
 
 Game::~Game()
@@ -20,13 +29,18 @@ void Game::mainMenu()
 		<< "1. Wyjdz" << std::endl
 		<< "2. Stworz Team" << std::endl
 		<< "3. Wybierz Team" << std::endl
-		<< "4. Stworz Postac" << std::endl
-		<< "5. Level Up" << std::endl
-		<< "6. Staty" << std::endl
+		<< "4. Level Up" << std::endl
+		<< "5. Staty" << std::endl
+		<< "6. Stworz bohatera" << std::endl
+		<< "7. Nap" << std::endl
 		<< std::endl
 		<< "Wybierz: ";
-	std::cin >> choice;
-	std::cin.ignore();
+	int choice;
+	do
+	{
+		choice = _getch();
+		choice -= '0';
+	} while (choice < 1 || choice > 7);
 	switch (choice)
 	{
 	case 1:
@@ -39,18 +53,19 @@ void Game::mainMenu()
 		chooseTeam();
 		break;
 	case 4:
-		createCharacter();
+		teams[curTeam].addExpToCharacter();
 		break;
 	case 5:
-		addExpToCharacter();
+	{
+		teams[curTeam].charactersMenu();
 		break;
+	}
 	case 6:
-		for (const Character& hero : teams[curTeam])
-		{
-			hero.drawSheet();
-			std::cout << std::endl;
-		}
+		teams[curTeam].createCharacter();
 		break;
+	case 7:
+		napierdalando(teams[curTeam][0], teams[curTeam][1]);
+			break;
 	default:
 		break;
 	}
@@ -58,53 +73,86 @@ void Game::mainMenu()
 
 void Game::createTeam()
 {
-	std::cout << "Podaj nazwe Teamu: ";
+	system("cls");
+	std::cout << "Podaj nazwe teamu: ";
 	std::string name = "NONE";
 	std::cin >> name;
-	std::cin.ignore();
-	teamNames.emplace_back(name);
-	teams.emplace_back();
+	//creating new team
+	teams.emplace_back(Team(name));
+	//init hero name
 	curTeam = teams.size() - 1;
-	createCharacter();
+	system("cls");
 }
 
-void Game::addExpToCharacter()
-{
-	int exp;
-	std::cout << std::endl;
-	std::cout << "Dodaj wszystkim postacia exp: ";
-	std::cin >> exp;
-	for (Character& hero : teams[curTeam])
-	{
-		hero.addExp(exp);
-	}
-}
+
+
 
 void Game::chooseTeam()
 {
-	std::cout << std::endl;
-	int cap = teams.size();
-	for (int i = 0; i < cap; i++)
-	{
-		std::cout << i + 1 << ". " << teamNames[i] << std::endl;
-	}
-	std::cout << std::endl
-		<< "Wybierz: ";
-	choice=0;
-	std::cin >> choice;
-	choice--;
-	if (choice < 0) choice = 0;
-	else if (choice >= cap) choice = cap - 1;
-	curTeam = choice;
+	this->curTeam = drawTeamMenu();
+	system("cls");
 }
 
-void Game::createCharacter()
+void Game::napierdalando(Character & c1, Character & c2)
 {
-	std::cout << "Podaj imie bohatyra: ";
-	std::string name = "NONE";
-	std::cin >> name;
-	std::cin.ignore();
-	teams[curTeam].emplace_back(Character(name));
-	//teams[curTeam][teams[curTeam].size() - 1].init();
+
+	c1.useSpell(SC.getFireball(), c2);
+	c1.useSpell(SC.getFireball(), c2);
+	c1.useSpell(SC.getLHeal(), c2);
+	SC.useSpell(c1, c2, SPELLS::LesserHeal);
 }
+
+void Game::battle(Team& t1, Team& t2)
+{
+	std::cout << "Ten, napieprzaja sie dwie druzyny!";
+	std::cin.get();
+	system("cls");
+	int teamIndex =0;
+	int cap1 = (int)t1.size();
+	int cap2 = (int)t2.size();
+	int wholeCap = cap2 + cap1;
+	std::vector<bool> atackers(wholeCap, 0);
+	int index;
+	while (wholeCap-- > 0 && t1.areAlive() && t2.areAlive())
+	{
+		do
+		{
+			index = rand() % wholeCap;
+		} while (atackers[index] == true);
+		if (index < cap1)
+		{
+
+		}
+		else
+		{
+			index -= cap1;
+		}
+	}
+	
+	//
+}
+
+
+
+
+
+int Game::drawTeamMenu() const
+{
+	const size_t size = teams.size();
+	char choice;
+	for (int i = 0; i < size; i++)
+	{
+		std::cout << i + 1 << ". " << teams[curTeam].getName() << "\n";
+	}
+	std::cout << "Wybierz team: ";
+	do
+	{
+		choice = _getch();
+		choice -= '0';
+	} while (--choice < 0 || choice >= size);
+	return choice;
+}
+
+
+
 
