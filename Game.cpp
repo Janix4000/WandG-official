@@ -4,7 +4,7 @@ Game::Game()
 {
 	choice = 0;
 	playing = true;
-	createCharacter();
+	createTeam();
 
 
 }
@@ -61,6 +61,7 @@ void Game::createTeam()
 	std::cout << "Podaj nazwe Teamu: ";
 	std::string name = "NONE";
 	std::cin >> name;
+	std::cin.ignore();
 	teamNames.emplace_back(name);
 	teams.emplace_back();
 	curTeam = teams.size() - 1;
@@ -102,7 +103,8 @@ void Game::createCharacter()
 	std::cout << "Podaj imie bohatyra: ";
 	std::string name = "NONE";
 	std::cin >> name;
-	teams[curTeam].emplace_back(Character());
-	teams[curTeam][teams.size() - 1].init(name);
+	std::cin.ignore();
+	teams[curTeam].emplace_back(Character(name));
+	//teams[curTeam][teams[curTeam].size() - 1].init();
 }
 
