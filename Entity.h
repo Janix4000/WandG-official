@@ -9,7 +9,7 @@ class Entity
 public:
 	Entity(const std::string name = "");
 
-	~Entity();
+	virtual ~Entity() = 0;
 
 	inline const std::string& getName() const { return this->name; }
 	inline const int& getHP() const { return this->hp; }
@@ -31,8 +31,6 @@ public:
 	int getDamage() const;
 	//void levelUp();
 	void drawSheet() const;
-
-	virtual void atack( Entity* target) = 0;
 
 	//Modifiers
 

@@ -27,13 +27,6 @@ void Character::levelUp()
 	}
 }
 
-void Character::atack( Entity * target)
-{
-	int dmg = getDamage();
-	std::cout << getName() << " atakuje: " << target->getName() << "\n"
-		<< "Zadaje " << dmg << " punktow obrazen, jest to bardzo efektywne!";
-	target->takeDamage(dmg);
-}
 
 
 void Character::addExp(int add)

@@ -95,11 +95,12 @@ void Game::chooseTeam()
 
 void Game::napierdalando(Character & c1, Character & c2)
 {
-
+	/*
 	c1.useSpell(SC.getFireball(), c2);
 	c1.useSpell(SC.getFireball(), c2);
 	c1.useSpell(SC.getLHeal(), c2);
 	SC.useSpell(c1, c2, SPELLS::LesserHeal);
+	*/
 }
 
 void Game::battle(Team& t1, Team& t2)

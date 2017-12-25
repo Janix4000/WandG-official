@@ -23,9 +23,7 @@ Entity::Entity( const std::string name )
 }
 
 
-Entity::~Entity()
-{
-}
+
 
 //Functions
 
@@ -58,6 +56,14 @@ void Entity::drawSheet() const
 		<< "Level: " << level << std::endl
 		//<< "Exp: " << exp << "/" << expToNext << std::endl
 		<< std::endl << std::endl;
+}
+
+void Entity::addLevel(int nTimes)
+{
+	for (int i = 0; i < nTimes; i++)
+	{
+		level++;
+	}
 }
 
 void Entity::takeDamage(int dam)

@@ -14,8 +14,6 @@ public:
 	//Functions
 	void levelUp();
 
-	void atack( Entity* target) override;
-
 	//Accesors
 
 	inline const int& getExp() const { return this->exp; }
