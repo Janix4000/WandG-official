@@ -5,22 +5,22 @@
 
 namespace dice
 {
-	int rollDice(int dice)
+	inline int rollDice(int dice)
 	{
 		return rand() % dice + 1;
 	}
 
-	int rollD6()
+	inline int rollD6()
 	{
 		return rollDice(6);
 	}
 
-	int rollD12()
+	inline int rollD12()
 	{
 		return rollDice(12);
 	}
 
-	int rollD20()
+	inline int rollD20()
 	{
 		return rollDice(20);
 	}

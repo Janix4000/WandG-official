@@ -4,7 +4,7 @@
 
 namespace out
 {
-	void writePressEnter()
+	inline void writePressEnter()
 	{
 		std::cout << "WCISNIJ ENTER...";
 		std::cin.clear();
