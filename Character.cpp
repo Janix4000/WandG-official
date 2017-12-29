@@ -6,6 +6,8 @@ Character::Character(const std::string& name)
 	:
 	Entity(name)
 {
+	maxHP = 40;
+	hp = getMaxtHP();
 }
 
 
