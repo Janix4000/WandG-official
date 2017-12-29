@@ -9,12 +9,8 @@ namespace out
 		std::cout << "WCISNIJ ENTER...";
 		std::cin.clear();
 		std::cin.ignore(std::numeric_limits<std::streamsize>().max(), '\n');
-		char input;
-		do
-		{
-			input = std::cin.get();
-		}
-		while (input != '13');
+		std::cin.get();
+
 		system("cls");
 	}
 }
