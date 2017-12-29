@@ -2,12 +2,14 @@
 
 
 #include "Inventory.h"
+#include "Dice.h"
+#include "Functions.h"
 
 
 class Entity
 {
 public:
-	Entity(const std::string name = "");
+	Entity(const std::string name = "", int lvl = 1);
 
 	virtual ~Entity() = 0;
 
@@ -24,11 +26,15 @@ public:
 	inline const int& getCharisma() const { return this->charisma; }
 	inline const int& getPrudence() const { return this->prudence; }
 
+	inline const int& getAtack() const { return this->atack; }
+	inline const int& getDefence() const { return this->defence; }
+	inline const int& getMagicPower() const { return this->magicPower; }
+
 	inline const int& getLevel() const { return this->level; }
 
-
+	void takeHeal(int heal);
 	void takeDamage(int dam);
-	int getDamage() const;
+	int getDamage(int additionalDmg = 0) const;
 	//void levelUp();
 	void drawSheet() const;
 
@@ -36,25 +42,28 @@ public:
 
 	//void addExp(int add);
 
-private:
+protected:
 	std::string name;
-	int hp;
-	int maxHP;
-	int pa;
-	int maxPA;
+	int maxHP = 10;
+	int hp =  maxHP;
+	int maxPA = 10;
+	int pa = maxPA;
 
-
-	int strength;
-	int intelligence;
-	int vitality;
-	int dexterity;
-	int charisma;
-	int prudence;
+	int strength = 1;
+	int intelligence = 1;
+	int vitality = 1;
+	int dexterity = 1;
+	int charisma = 1;
+	int prudence = 1;
 
 	int level;
 
 	Weapon weapon;
 	Armor armor;
+
+	int defence = 0;
+	int atack = 0;
+	int magicPower = 0;
 
 protected:
 	void addLevel(int nTimes = 1);

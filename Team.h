@@ -1,5 +1,5 @@
 #pragma once
-#include "Character.h"
+#include "Goblin.h"
 #include <stdio.h>
 
 class Team

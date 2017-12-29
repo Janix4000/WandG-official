@@ -4,22 +4,10 @@ Entity::~Entity()
 {
 }
 
-Entity::Entity( const std::string name )
+Entity::Entity( const std::string name , int lvl)
 {
+	this->level = lvl;
 	this->name = name;
-	this->maxHP = 10;
-	this->hp = maxHP;
-	this->maxPA = 10;
-	this->pa = maxPA;;
-
-	this->strength = 0;
-	this->intelligence = 0;
-	this->vitality = 0;
-	this->dexterity = 0;
-	this->charisma = 0;
-	this->prudence = 0;
-
-	this->level = 1;
 }
 
 
@@ -66,13 +54,37 @@ void Entity::addLevel(int nTimes)
 	}
 }
 
+void Entity::takeHeal(int heal)
+{
+	if (isAlive())
+	{
+		std::cout << getName() << " zostal hilniety za " << heal << " punktow obrazen.\n";
+		hp += heal;
+		if (hp > maxHP)
+		{
+			hp = maxHP;
+		}
+	}
+	else
+	{
+		std::cout << "Martwego nie uleczysz...\n";
+	}
+	out::writePressEnter();
+}
+
 void Entity::takeDamage(int dam)
 {
 	this->hp -= dam;
+	std::cout << getName() << " otrzymal " << dam << " punktow obrazen.\n";
+	if (!isAlive())
+	{
+		std::cout << "To byl smiertelny cios...\n";
+	}
+	out::writePressEnter();
 }
 
-int Entity::getDamage() const
+int Entity::getDamage(int additionalDmg) const
 {
-	return this->strength;
+	return this->strength + this->atack + dice::rollD6() + additionalDmg;
 }
 

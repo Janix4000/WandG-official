@@ -5,17 +5,9 @@ Game::Game()
 {
 	playing = true;
 	createTeam();
-	/*
-	Inventory inv;
-	inv.addItem(Weapon("Stasiek"));
-	inv.addItem(Weapon("Mariola"));
-	inv.addItem(Weapon("Andrzej"));
-	inv.addItem(Armor("Husiek"));
-	for (int i = 0; i < inv.size(); i++)
-	{
-		std::cout << inv[i].getName() << std::endl;
-	}
-	*/
+	insertGoblin("Stefan");
+	insertGoblin("Marcin");
+	insertGoblin("Inny chuj");
 }
 
 Game::~Game()
@@ -95,12 +87,12 @@ void Game::chooseTeam()
 
 void Game::napierdalando(Character & c1, Character & c2)
 {
-	/*
-	c1.useSpell(SC.getFireball(), c2);
-	c1.useSpell(SC.getFireball(), c2);
-	c1.useSpell(SC.getLHeal(), c2);
-	SC.useSpell(c1, c2, SPELLS::LesserHeal);
-	*/
+
+}
+
+void Game::battleSimulator(Character & Hero)
+{
+	
 }
 
 void Game::battle(Team& t1, Team& t2)
@@ -152,6 +144,11 @@ int Game::drawTeamMenu() const
 		choice -= '0';
 	} while (--choice < 0 || choice >= size);
 	return choice;
+}
+
+void Game::insertGoblin(const std::string& name)
+{
+	monsters.emplace_back(std::make_unique<Goblin>(name));
 }
 
 
