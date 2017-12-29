@@ -5,7 +5,7 @@ class Goblin :
 	public Monster
 {
 public:
-	Goblin(const std::string& name = "", int lvl = 1);
+	Goblin(const std::string& name = "" , int lvl = 1);
 
 private:
 	int biteDmg = 2;

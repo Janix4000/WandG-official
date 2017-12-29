@@ -58,7 +58,7 @@ void Entity::takeHeal(int heal)
 {
 	if (isAlive())
 	{
-		std::cout << getName() << " zostal hilniety za " << heal << " punktow obrazen.\n";
+		std::cout << getName() << " zostal hilniety za " << heal << " punktow.\n";
 		hp += heal;
 		if (hp > maxHP)
 		{

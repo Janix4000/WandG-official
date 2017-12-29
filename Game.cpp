@@ -56,7 +56,9 @@ void Game::mainMenu()
 		teams[curTeam].createCharacter();
 		break;
 	case 7:
-		napierdalando(teams[curTeam][0], teams[curTeam][1]);
+		//napierdalando(teams[curTeam][0], teams[curTeam][1]);
+		battleSimulator(teams[curTeam][0]);
+		system("cls");
 			break;
 	default:
 		break;
@@ -92,7 +94,10 @@ void Game::napierdalando(Character & c1, Character & c2)
 
 void Game::battleSimulator(Character & Hero)
 {
-	
+	for (int i = 0; i < monsters.size(); i++)
+	{
+		monsters[i]->atack(Hero);
+	}
 }
 
 void Game::battle(Team& t1, Team& t2)
@@ -148,7 +153,7 @@ int Game::drawTeamMenu() const
 
 void Game::insertGoblin(const std::string& name)
 {
-	monsters.emplace_back(std::make_unique<Goblin>(name));
+	monsters.emplace_back( std::make_unique<Goblin>(name) );
 }
 
 

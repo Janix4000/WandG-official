@@ -31,5 +31,5 @@ private:
 	std::vector<std::unique_ptr<Monster>> monsters;
 
 	int drawTeamMenu()const;
-	void insertGoblin(const std::string& name = "");
+	void insertGoblin(const std::string& name = "Maciej");
 };

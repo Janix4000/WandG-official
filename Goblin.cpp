@@ -24,10 +24,10 @@ void Goblin::bite(Character & target)
 	int damage = getDamage(biteDmg);
 	int restoredHealth = damage / 3;
 
-	std::cout << "Chuj goblin gryzie!\n";
+	std::cout << "Chuj "<< getName() << " gryzie!\n";
 	target.takeDamage(damage);
 
-	std::cout << "Huj Goblin napelnil brzuszek.\n";
+	std::cout << "Chuj " << getName() << " napelnil brzuszek.\n";
 	takeHeal(restoredHealth);
 }
 
@@ -35,7 +35,7 @@ void Goblin::punch(Character & target)
 {
 	int damage = getDamage(punchDmg);
 
-	std::cout << "Goblin zwyzywal matke bohatera " << target.getName() << ".\n"
+	std::cout << getName() << " zwyzywal matke bohatera " << target.getName() << ".\n"
 		<< "Jest tak zazenowany poziomem jego puncha,\n"
 		<< "ze nie zauwaza, ze wlasnie oberwal w ryj.\n";
 
